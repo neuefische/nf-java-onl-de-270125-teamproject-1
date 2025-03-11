@@ -1,5 +1,11 @@
+import {Route, Routes} from "react-router-dom";
+import BooksPage from "./pages/BooksPage.tsx";
+
 export default function App() {
     return (
-        <p>Hello World!</p>
+        <Routes>
+            <Route path="/" element={<p>wefwefwef</p>}/>
+            <Route path="/books" element={<BooksPage/>}/>
+        </Routes>
     );
 }
