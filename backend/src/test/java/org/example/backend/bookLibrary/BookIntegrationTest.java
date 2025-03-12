@@ -42,7 +42,7 @@ public class BookIntegrationTest {
 
     @DirtiesContext
     @Test
-    void addBook_shouldReturnCreatedBook()throws Exception{
+    void addBook_shouldReturnCreatedBook() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/api/books")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(
@@ -63,6 +63,17 @@ public class BookIntegrationTest {
                                     """
                 ))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+    }
+
+    @DirtiesContext
+    @Test
+    void deleteBook_shouldReturnEmptyBody() throws Exception {
+        bookRepository.save(new Book("1", "Buch 1", "Author 1"));
+
+        mvc.perform(MockMvcRequestBuilders.delete("/api/books/1"))
+                .andExpect(
+                        MockMvcResultMatchers.status().isOk()
+                );
     }
 }
 
