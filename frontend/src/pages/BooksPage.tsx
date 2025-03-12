@@ -1,9 +1,15 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import Book from "../components/Book.tsx";
+import {Book as BookType} from "../types/Book.ts"
 
 export default function BooksPage() {
-    const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState<BookType[]>([]);
+    const [newBook, setNewBook] = useState<BookType>({id: "", title: "", author: ""})
+
+    useEffect(() => {
+        fetchBooks();
+    }, []);
 
     const fetchBooks = () => {
         axios.get("/api/books")
@@ -11,9 +17,16 @@ export default function BooksPage() {
             .catch(error => console.error("Error fetching books: ", error))
     };
 
-    useEffect(() => {
-        fetchBooks();
-    }, []);
+    const addBook = (e: FormEvent<HTMLFormElement>) =>{
+        e.preventDefault()
+        axios.post("/api/books", newBook)
+            .then(() => {
+                setBooks([...books, newBook])
+            })
+            .catch(error => {
+                console.error("Adding book failed", error)
+            })
+    }
 
     return (
         <div>
@@ -22,6 +35,19 @@ export default function BooksPage() {
                     <Book book={book} />
                 ))
             }
+            <form onSubmit={addBook}>
+                <input
+                    placeholder="title"
+                    value={newBook.title}
+                    onChange={(event) => setNewBook({ ...newBook, title: event.target.value })}
+                />
+                <input
+                    placeholder="author"
+                    value={newBook.author}
+                    onChange={(event) => setNewBook({ ...newBook, author: event.target.value })}
+                />
+                <button>Add book</button>
+            </form>
         </div>
     );
 }

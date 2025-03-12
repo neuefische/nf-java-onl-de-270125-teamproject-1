@@ -1,9 +1,7 @@
 package org.example.backend.bookLibrary;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +15,11 @@ public class BookController {
     @GetMapping
     List<Book> getAll(){
         return bookService.getAll();
+    }
+
+    @PostMapping
+    Book addBook(@RequestBody BookDTO bookDTO) {
+        return bookService.addBook(bookDTO);
     }
 
 }
