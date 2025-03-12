@@ -6,6 +6,7 @@ export default function App() {
         <Routes>
             <Route path="/" element={<h1>Home</h1>}/>
             <Route path="/books" element={<BooksPage/>}/>
+            <Route path="/books/add" element={<BooksPage/>}/> {/*add component*/}
         </Routes>
     );
 }
