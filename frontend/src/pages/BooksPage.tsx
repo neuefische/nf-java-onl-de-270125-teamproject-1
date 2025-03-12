@@ -23,6 +23,9 @@ export default function BooksPage() {
             .then(() => {
                 setBooks([...books, newBook])
             })
+            .catch(error => {
+                console.error("Adding book failed", error)
+            })
     }
 
     return (
