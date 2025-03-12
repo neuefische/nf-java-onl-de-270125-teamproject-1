@@ -28,11 +28,18 @@ export default function BooksPage() {
             })
     }
 
+    const deleteBook = (id:string) => {
+        axios.delete("/api/books/" + id)
+            .then(() => {
+                setBooks((books) => books.filter((book)=> book.id !== id))
+            })
+    }
+
     return (
         <div>
             {
                 books.map((book) => (
-                    <Book book={book} />
+                    <Book key={book.id} book={book} deleteBook={deleteBook}/>
                 ))
             }
             <form onSubmit={addBook}>

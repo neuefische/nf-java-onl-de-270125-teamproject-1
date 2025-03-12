@@ -19,4 +19,8 @@ public class BookService {
         Book newBook = new Book(null, bookDTO.title(), bookDTO.author());
         return bookRepository.save(newBook);
     }
+
+    public void deleteBook(String id) {
+        bookRepository.deleteById(id);
+    }
 }

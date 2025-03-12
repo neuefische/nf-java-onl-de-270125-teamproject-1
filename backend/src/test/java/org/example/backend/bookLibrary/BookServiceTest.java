@@ -43,4 +43,17 @@ class BookServiceTest {
         verify(mockBookRepository).save(any(Book.class));
         assertEquals(expectedBook, result);
     }
+
+    @Test
+    public void deleteBookTest() {
+        // If
+        String bookId = "1";
+        doNothing().when(mockBookRepository).deleteById(bookId);
+
+        // When
+        bookService.deleteBook(bookId);
+
+        // Then
+        verify(mockBookRepository).deleteById(bookId);
+    }
 }
