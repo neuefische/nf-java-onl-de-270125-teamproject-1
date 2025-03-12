@@ -22,4 +22,9 @@ public class BookController {
         return bookService.addBook(bookDTO);
     }
 
+    @DeleteMapping("{id}")
+    void deleteBook(@PathVariable String id) {
+        bookService.deleteBook(id);
+    }
+
 }
