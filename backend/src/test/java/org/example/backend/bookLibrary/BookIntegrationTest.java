@@ -47,20 +47,20 @@ public class BookIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(
                                 """
-                                             {
-                                                  "title": "Buch 1",
-                                                  "author": "Author 1"
-                                             }
-                                            """
+                                         {
+                                              "title": "Buch 1",
+                                              "author": "Author 1"
+                                         }
+                                        """
                         ))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(
                         """
-                                     {
-                                         "title": "Buch 1",
-                                         "author": "Author 1"
-                                     }
-                                    """
+                                 {
+                                     "title": "Buch 1",
+                                     "author": "Author 1"
+                                 }
+                                """
                 ))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
     }
@@ -75,5 +75,30 @@ public class BookIntegrationTest {
                         MockMvcResultMatchers.status().isOk()
                 );
     }
+
+    @Test
+    @DirtiesContext
+    void getBookById() throws Exception {
+        Book bookToSave = Book.builder()
+                .id("1")
+                .title("Test")
+                .author("Test")
+                .build();
+        bookRepository.save(bookToSave);
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/books/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """
+                                {
+                                    id: "1",
+                                    title: "Test",
+                                    author: "Test"
+                                }
+                                """
+                ));
+
+    }
+
 }
 
