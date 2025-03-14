@@ -17,6 +17,11 @@ public class BookController {
         return bookService.getAll();
     }
 
+    @GetMapping("/{id}")
+    Book getBookById(@PathVariable String id){
+        return bookService.getBookById(id);
+    }
+
     @PostMapping
     Book addBook(@RequestBody BookDTO bookDTO) {
         return bookService.addBook(bookDTO);
