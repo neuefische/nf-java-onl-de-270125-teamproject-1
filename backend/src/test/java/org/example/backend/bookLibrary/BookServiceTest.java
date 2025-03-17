@@ -3,6 +3,7 @@ package org.example.backend.bookLibrary;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -55,5 +56,22 @@ class BookServiceTest {
 
         // Then
         verify(mockBookRepository).deleteById(bookId);
+    }
+
+    @Test
+    void getBookById() {
+        //GIVEN
+        Book book1 = Book.builder()
+                .id("1")
+                .author("Test")
+                .title("Test")
+                .build();
+
+        when(mockBookRepository.findById(book1.id())).thenReturn(Optional.of(book1));
+        //WHEN
+        Book actual = bookService.getBookById("1");
+        //THEN
+        verify(mockBookRepository).findById(book1.id());
+        assertEquals(book1, actual);
     }
 }

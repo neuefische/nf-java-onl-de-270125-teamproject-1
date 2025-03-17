@@ -1,4 +1,5 @@
 import { Book as BookType } from "../types/Book.ts";
+import {Link} from "react-router-dom";
 
 type BookProps = {
     book: BookType;
@@ -12,6 +13,7 @@ export default function Book({ book, deleteBook}: BookProps) {
             <p>Author: {book.author}</p>
 
             <button onClick={()=>{deleteBook(book.id)}}>x</button>
+            <Link to={`/books/${book.id}`}>Details</Link>
         </div>
     );
 }
