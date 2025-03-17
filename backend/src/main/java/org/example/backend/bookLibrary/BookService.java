@@ -29,4 +29,11 @@ public class BookService {
         return bookRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("No Book found with id: " + id));
     }
+
+    public Book updateBookById(BookDTO bookDTO, String id) {
+        Book book = getBookById(id);
+        Book updatedBook = new Book(book.id(), bookDTO.title(), bookDTO.author());
+
+        return bookRepository.save(updatedBook);
+    }
 }

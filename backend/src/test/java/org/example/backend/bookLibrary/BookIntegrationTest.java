@@ -99,5 +99,32 @@ public class BookIntegrationTest {
                 ));
 
     }
+
+    @DirtiesContext
+    @Test
+    void updateBookById_shouldReturnUpdatedBook() throws Exception {
+        bookRepository.save(new Book("1", "Buch 1", "Author 1"));
+
+        mvc.perform(MockMvcRequestBuilders.put("/api/books/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(
+                                """
+                                         {
+                                              "title": "Buch 2",
+                                              "author": "Author 2"
+                                         }
+                                        """
+                        ))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """
+                                 {
+                                     "id": "1",
+                                     "title": "Buch 2",
+                                     "author": "Author 2"
+                                 }
+                                """
+                ));
+    }
 }
 
