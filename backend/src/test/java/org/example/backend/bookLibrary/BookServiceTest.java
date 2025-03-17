@@ -74,4 +74,24 @@ class BookServiceTest {
         verify(mockBookRepository).findById(book1.id());
         assertEquals(book1, actual);
     }
+
+    @Test
+    void updateBookById() {
+        // GIVEN
+        Book book = new Book("1", "Test", "Author");
+        BookDTO bookDTO = new BookDTO("Test2", "Author2");
+
+        when(mockBookRepository.findById(book.id())).thenReturn(Optional.of(book));
+
+        Book updatedBook = new Book(book.id(), bookDTO.title(), bookDTO.author());
+        when(mockBookRepository.save(any(Book.class))).thenReturn(updatedBook);
+
+        // WHEN
+        Book actual = bookService.updateBookById(bookDTO, book.id());
+
+        // THEN
+        verify(mockBookRepository).findById(book.id());
+        verify(mockBookRepository).save(any(Book.class));
+        assertEquals(updatedBook, actual);
+    }
 }
