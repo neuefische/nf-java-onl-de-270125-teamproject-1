@@ -48,14 +48,21 @@ class BookServiceTest {
     @Test
     public void deleteBookTest() {
         // If
-        String bookId = "1";
-        doNothing().when(mockBookRepository).deleteById(bookId);
+        Book book1 = Book.builder()
+                .id("1")
+                .author("Test")
+                .title("Test")
+                .build();
+
+        doNothing().when(mockBookRepository).deleteById(book1.id());
+        when(mockBookRepository.findById(book1.id())).thenReturn(Optional.of(book1));
 
         // When
-        bookService.deleteBook(bookId);
+        bookService.getBookById(book1.id());
+        bookService.deleteBook(book1.id());
 
         // Then
-        verify(mockBookRepository).deleteById(bookId);
+        verify(mockBookRepository).deleteById(book1.id());
     }
 
     @Test
