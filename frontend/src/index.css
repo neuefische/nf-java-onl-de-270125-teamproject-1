@@ -1,4 +1,146 @@
 *, *::before, *::after {
   margin: 0;
   padding: 0;
+  font-family: Galvji, Arial, Roboto, sans-serif;
+}
+
+.header-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: aquamarine;
+}
+
+.navbar-container{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.nav-item{
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.main-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  max-width: 100%;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  margin: 1rem;
+}
+.book-container{
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  background: #ffffff;
+  border: 2px solid black;
+  border-radius: 12px;
+  min-width: 20rem;
+  padding: 0.5rem;
+  gap: 15px;
+}
+
+.book-item{
+  padding: 15px;
+  background: #ffffff;
+
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-utility{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.delete-book-button{
+  background: red;
+  color: white;
+  width: 4rem;
+  height: 2rem;
+  border-radius: 3px;
+}
+
+.add-book-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.add-book-button{
+  background: green;
+  color: white;
+  width: 4rem;
+  height: 2rem;
+  border-radius: 3px;
+}
+
+.view-details-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border 0.3s ease-in-out;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+button {
+  background: #007bff;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+a {
+  display: block;
+  margin-top: 15px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #0056b3;
 }

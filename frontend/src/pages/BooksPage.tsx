@@ -17,7 +17,7 @@ export default function BooksPage() {
             .catch(error => console.error("Error fetching books: ", error))
     };
 
-    const addBook = (e: FormEvent<HTMLFormElement>) =>{
+    const addBook = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         axios.post("/api/books", newBook)
             .then(() => {
@@ -28,33 +28,41 @@ export default function BooksPage() {
             })
     }
 
-    const deleteBook = (id:string) => {
+    const deleteBook = (id: string) => {
         axios.delete("/api/books/" + id)
             .then(() => {
-                setBooks((books) => books.filter((book)=> book.id !== id))
+                setBooks((books) => books.filter((book) => book.id !== id))
             })
     }
 
     return (
-        <div>
+        <div className={"main-container"}>
+        <div className={"book-container"}>
             {
                 books.map((book) => (
                     <Book key={book.id} book={book} deleteBook={deleteBook}/>
                 ))
             }
-            <form onSubmit={addBook}>
-                <input
-                    placeholder="title"
-                    value={newBook.title}
-                    onChange={(event) => setNewBook({ ...newBook, title: event.target.value })}
-                />
-                <input
-                    placeholder="author"
-                    value={newBook.author}
-                    onChange={(event) => setNewBook({ ...newBook, author: event.target.value })}
-                />
-                <button>Add book</button>
-            </form>
+        </div>
+
+
+            <div className={"add-book-container"}>
+                <form onSubmit={addBook}>
+                    <div>
+                    <input
+                        placeholder="title"
+                        value={newBook.title}
+                        onChange={(event) => setNewBook({...newBook, title: event.target.value})}
+                    />
+                    <input
+                        placeholder="author"
+                        value={newBook.author}
+                        onChange={(event) => setNewBook({...newBook, author: event.target.value})}
+                    />
+                    </div>
+                    <button className={"add-book-button"}>Add</button>
+                </form>
+            </div>
         </div>
     );
 }

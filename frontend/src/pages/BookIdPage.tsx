@@ -30,7 +30,7 @@ export default function BookIdPage() {
     }, []);
 
     return (
-        <div>
+        <div className={"view-details-container"}>
             <form onSubmit={updateBook}>
                 <label>Id</label>
                 <input type={"text"} value={book.id} disabled={true}/>
