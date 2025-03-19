@@ -14,6 +14,5 @@ export default function App() {
             <Route path="/books/:id" element={<BookIdPage/>}/>
         </Routes>
         </>
-
     );
 }
