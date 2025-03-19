@@ -22,6 +22,7 @@ public class BookService {
     }
 
     public void deleteBook(String id) {
+        getBookById(id);
         bookRepository.deleteById(id);
     }
 

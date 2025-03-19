@@ -126,5 +126,22 @@ public class BookIntegrationTest {
                                 """
                 ));
     }
+
+    @Test
+    @DirtiesContext
+    void globalExceptionHandling_shouldReturnErrorMessage() throws Exception {
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/books/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """
+                                {
+                                    "message": "No Book found with id: 1"
+                                }
+                                """
+                ))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.timestamp").exists());
+
+    }
 }
 
