@@ -24,6 +24,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(a -> a
                         .requestMatchers("/api/auth/me").authenticated()
+                        .requestMatchers("/api/books/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
@@ -32,5 +33,4 @@ public class SecurityConfig {
                 .oauth2Login(o -> o.defaultSuccessUrl(appUrl));
         return http.build();
     }
-
 }
