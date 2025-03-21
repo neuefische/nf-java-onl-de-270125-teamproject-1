@@ -157,9 +157,9 @@ public class BookIntegrationTest {
     @DirtiesContext
     void getMe() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/api/auth/me").with(oidcLogin().userInfoToken(token -> token
-                                .claim("login", "test-user")
-                        ))
-                )
+                .claim("login", "test-user")
+        ))
+        )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("test-user"));
     }

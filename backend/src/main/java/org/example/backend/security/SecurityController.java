@@ -1,4 +1,4 @@
-package org.example.backend;
+package org.example.backend.security;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
-
+public class SecurityController {
     @GetMapping("/me")
     public String getMe(@AuthenticationPrincipal OAuth2User user) {
         return user.getAttributes().get("login").toString();

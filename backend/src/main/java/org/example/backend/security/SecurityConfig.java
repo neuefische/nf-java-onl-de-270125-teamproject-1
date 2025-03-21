@@ -1,4 +1,4 @@
-package org.example.backend;
+package org.example.backend.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,6 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     @Value("${app.url}")
     private String appUrl;
 
@@ -23,14 +22,18 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(a -> a
-                        .requestMatchers("/api/auth/me").authenticated()
-                        .requestMatchers("/api/books/**").authenticated()
-                        .anyRequest().permitAll()
+                        // .requestMatchers("/api/auth/me").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .sessionManagement(s ->
+                        s.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                )
+                .logout(l -> l.logoutSuccessUrl(appUrl))
+                .oauth2Login(o -> o.defaultSuccessUrl(appUrl))
                 .exceptionHandling(e -> e
-                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-                .oauth2Login(o -> o.defaultSuccessUrl(appUrl));
+                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                );
+
         return http.build();
     }
 }
